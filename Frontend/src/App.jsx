@@ -13,12 +13,16 @@ import { AddMenu } from './Pages/AddMenu'
 import { AdminSignup } from './Pages/AdminSignup'
 import { AdminLogin } from './Pages/AdminLogin'
 import { AdminStatusChange } from './Pages/AdminStatusChange'
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_51Q3A8907tIc5oTXBtgselQRXk67WbbjMMM77V9AdHDqGhuAN7UpEZin4JZoZDDINt24NszTzqhBDidfP3iTBcaIM00f74WmCTg");
 
 function App() {
 
 
   return (
     <>
+      <Elements stripe={stripePromise}>
          <CartProvider>
       <BrowserRouter>
       <Routes>
@@ -30,8 +34,10 @@ function App() {
 
   
             
-           <Route path='/dashboard/:id' element={<RestroMenu/> } />   
-           <Route path='/cart/:name/:id' element={<CartPage/>} />  
+           <Route path='/dashboard/:id' element={<RestroMenu/> } />  
+
+            <Route path='/cart/:name/:id' element={<CartPage/>} />
+          
 
            <Route path='/restroregistration' element={<RestoRegistration/>}/> 
            <Route path='/restrologin' element={<RestroLogin/>}/> 
@@ -51,6 +57,7 @@ function App() {
 
 
       </CartProvider> 
+      </Elements> 
 
      
     </>

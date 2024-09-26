@@ -4,6 +4,7 @@ const userSchema = zod.object({
 
     username : zod.string().min(3).max(20),
     email : zod.string().email(),
+    adress : zod.string() , 
     password : zod.string().min(6).max(20)
 })
 

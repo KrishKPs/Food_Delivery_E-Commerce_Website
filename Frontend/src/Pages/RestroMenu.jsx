@@ -1,81 +1,80 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
 import { MenuCard } from "../Components/Menucard";
-import {  useCart } from "../Components/AddtoCard";    
+import { useCart } from "../Components/AddtoCard";
+import { IoCartOutline } from "react-icons/io5"; // Cart icon from React Icons
 
-export function RestroMenu() { 
+export function RestroMenu() {
+  const restaurant = useParams();
+  const [menu, setMenu] = useState([]);
+  const [name, setName] = useState("");
+  const [show, setShow] = useState(false);
 
-    const restaurant = useParams(); 
-    const [menu , setMenu] = useState([]);  
-    const [name , setName] = useState(''); 
-    const [show , setshow] = useState(false);    
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();    
+  const { addtocart } = useCart();
+  const { cart } = useCart(); // Get cart from useCart context
+  const { clearCart } = useCart();
+  const { removefromcart } = useCart();  
 
-    const {addtocart} = useCart();   
-    const {cart} = useCart();    
-    const {clearCart} = useCart();   
-   
-
-
- const menuitems = async () => {
-
-    const responce = await axios.get(`http://localhost:3062/foodapp/menu/restaurant/${restaurant.id}` , {
-        headers : {
-            Authorization : `${localStorage.getItem('token')}`
-        } 
-    })
-   
-    .then((responce) => {
-      
-        setMenu(responce.data.restaurant) 
-        console.log(responce.data.restaurant); 
-        setName(responce.data.restaurant[0].restroname);       
-        console.log(responce.data.restaurant[0].restroname);    
-    })
-    .catch((err) => { console.log(err) } ) ; 
- }
-
- useEffect(()=>{
-
-    menuitems();     
- },[])
-
-
-    return (
-
-        <>
-
-
-   
-
-<div>
-            <h1>{name} Menu</h1>
-
-            
-            {menu.map((menuItem, index) => (
-                <MenuCard key={index} data={menuItem} addtocart={addtocart}  setshow={setshow} />  
-            ))}
-
-            <div>
-               <button onClick={ () => {navigate(`/cart/${encodeURIComponent(name)}/${restaurant.id}`)}}> Place Order </button>    
-            </div>
-        </div>
-
-
-        {
-  show ? (
-    <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-bounce">
-      <h1 className="text-lg font-semibold">Item Added to Cart</h1>
-    </div>
-  ) : null
-}
-
-        
-            
-        
-        
-        </>
+  const menuitems = async () => {
+    const response = await axios.get(
+      `http://localhost:3062/foodapp/menu/restaurant/${restaurant.id}`,
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
     )
- }
+      .then((response) => {
+        setMenu(response.data.restaurant);
+        console.log(response.data.restaurant);
+        setName(response.data.restaurant[0].restroname);
+        console.log(response.data.restaurant[0].restroname);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    menuitems();
+  }, []);
+
+  // Calculate total items in the cart
+  const totalItemsInCart = cart.reduce((total, item) => total + item.quantity, 0);
+
+  return (
+    <>
+      {/* Restaurant Name and Cart Icon */}
+      <div className="flex justify-between items-center px-4 py-6 bg-gray-100 shadow-sm">
+        <h1 className="text-3xl font-bold text-gray-800">{name} Menu</h1>
+        {/* Cart Icon with item counter */}
+        <div className="relative">
+          <IoCartOutline
+            className="text-4xl text-gray-800 cursor-pointer"
+            onClick={() => navigate(`/cart/${encodeURIComponent(name)}/${restaurant.id}`)}
+          />
+          {totalItemsInCart  > 0 && (   
+            <div className="absolute top-0 right-0 bg-red-500 text-white text-sm font-bold h-5 w-5 rounded-full flex items-center justify-center">
+              {totalItemsInCart}
+            </div>
+          )}
+
+    
+        </div>
+      </div>
+
+      {/* Menu Items Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        {menu.map((menuItem, index) => (
+          <MenuCard key={index} data={menuItem} addtocart={addtocart} setshow={setShow} removefromcart={removefromcart}  />
+        ))}
+      </div>
+
+      {/* Floating Item Added to Cart Notification */}
+      
+    </>
+  );
+}

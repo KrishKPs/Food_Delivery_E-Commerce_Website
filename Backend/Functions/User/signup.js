@@ -1,6 +1,7 @@
 const generateJWT = require("../../MiddleWare/generatejwt");
 const { user, userorder } = require("../../db");
 const { userSchema } = require("../../type");
+const bcrypt = require('bcryptjs');    
 
 async function signup (req,res) {
 
@@ -11,11 +12,17 @@ async function signup (req,res) {
         return res.status(400).json({message : 'Invalid data'}); 
     } 
 
+    const hashed = await bcrypt.hash(person.password, 10);   
+
+
     await user.create({
         username : person.username, 
-        email : person.email,   
-        password : person.password
+        email : person.email,  
+        adress : person.adress ,  
+        password : hashed
     })
+
+
 
     const token = generateJWT(person); 
 

@@ -15,6 +15,7 @@ const AdminLogin = require('../Functions/Admin/login');
 const allhistroy = require('../Functions/Admin/seependingorders');
 const updatestatus = require('../Functions/Admin/updatestatus');
 const {cityrestro} = require('../Functions/User/Restro');
+const payment = require('../Functions/User/payment');
 const router = express.Router();         
 
 
@@ -44,6 +45,8 @@ router.post('/admin/signup' , AdminSignup)
 router.post('/admin/login' , AdminLogin)
 router.get('/admin/pendingorders' , Authenticate , allhistroy)  
 router.post('/admin/updateorder' , Authenticate , updatestatus) 
+
+router.post('/payment' , Authenticate , payment )
 
 
 module.exports = router;     
