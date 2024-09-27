@@ -56,6 +56,8 @@ router.post('/admin/login' , AdminLogin)
 router.get('/admin/pendingorders' , Authenticate , allhistroy)  
 router.post('/admin/updateorder' , Authenticate , updatestatus) 
 
+router.options('/payment', cors(corsOptions)); // Handle preflight requests
+
 router.post('/payment' , cors(corsOptions), Authenticate , payment )
 
 
