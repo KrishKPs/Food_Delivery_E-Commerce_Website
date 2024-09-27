@@ -48,7 +48,7 @@ function App() {
 
            <Route path='/adminsignup' element= {<AdminSignup/>} />   
            <Route path='/adminlogin' element= {<AdminLogin/>} />  
-           <Route path='/pendingorders' element= {<AdminStatusChange/>} /> 
+           {/* <Route path='/pendingorders' element= {<AdminStatusChange/>} />  */}
 
            <Route path='orders' element={<OrderHistroy/>} />  
 
