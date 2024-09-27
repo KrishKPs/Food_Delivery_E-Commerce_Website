@@ -21,7 +21,7 @@ const router = express.Router();
 
 
 const corsOptions = {
-    origin: 'https://frontend-9rbjl8kx5-krish-patels-projects-3e6b9326.vercel.app',  // Your frontend URL
+    origin: '*',  // Your frontend URL
     methods: ['GET', 'POST', 'OPTIONS'],  // Include OPTIONS for preflight requests
     allowedHeaders: ['Content-Type', 'Authorization'],  // Include necessary headers
     credentials: true
