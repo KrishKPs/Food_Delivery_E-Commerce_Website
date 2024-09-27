@@ -8,9 +8,9 @@ const {  adminSchema } = require("../../type");
     const person = req.body;  
     const safeperson = adminSchema.safeParse(person);        
 
-    if(!safeperson.success) {
-        return res.status(400).json({message : 'Invalid data check'}); 
-    } 
+    if(!safeperson.success) {  
+        return res.status(400).json({message : 'Invalid data check'});    
+     }
 
     await admin.create({
         username : person.username, 

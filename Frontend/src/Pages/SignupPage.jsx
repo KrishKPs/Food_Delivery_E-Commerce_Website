@@ -22,7 +22,7 @@ export function SignupPage () {
 
 
 
-        const responce = await axios.post('https://backend-8ew7thslt-krish-patels-projects-3e6b9326.vercel.app/foodapp/signup', user)
+        const responce = await axios.post('https://backend-l7u8fzvxj-krish-patels-projects-3e6b9326.vercel.app/foodapp/signup', user)
 
         .then((responce) => {
 

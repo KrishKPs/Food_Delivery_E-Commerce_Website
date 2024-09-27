@@ -21,7 +21,7 @@ export function LoginPage () {
 
 
 
-        const responce = await axios.post('https://backend-8ew7thslt-krish-patels-projects-3e6b9326.vercel.app/foodapp/login', user)
+        const responce = await axios.post('https://backend-l7u8fzvxj-krish-patels-projects-3e6b9326.vercel.app/foodapp/login', user)
 
         .then((responce) => {
 

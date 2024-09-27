@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use('/foodapp' , mainRouter)
 app.get ('/' , function (req,res) {
-    res.send('Hello World')  ; 
+    res.send('Hello Krish')  ; 
 } )
 
 
