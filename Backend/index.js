@@ -11,6 +11,9 @@ app.use(express.json());
 app.use(cors());   
 
 app.use('/foodapp' , mainRouter)
+app.get ('/' , function (req,res) {
+    res.send('Hello World')  ; 
+} )
 
 
 
