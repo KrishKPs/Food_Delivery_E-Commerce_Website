@@ -1,90 +1,89 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {  PendingOrderCard } from "../Components/PendingOrdercard";
+import { PendingOrderCard } from "../Components/PendingOrderCard"; // Assuming this component is already styled
 
+export function AdminStatusChange() {
+  const [data, setdata] = useState([]);
 
-export function AdminStatusChange () {
+  const pendingorders = async () => {
+    await axios
+      .get("http://localhost:3062/foodapp/admin/pendingorders", {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
+      .then((responce) => {
+        setdata(responce.data.order);
+        console.log(responce.data.order);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const [data , setdata] = useState([]);   
+  useEffect(() => {
+    pendingorders();
+  }, []);
 
-
-    const pendingorders = async () => {
-
-
-        const responce = await axios.get ('http://localhost:3062/foodapp/admin/pendingorders' , {
-            headers : {
-                Authorization : `${localStorage.getItem('token')}`
-            }    
-        })
-        .then((responce) => {
-        
-            setdata(responce.data.order); 
-            
-            console.log(responce.data.order);    
-            
-
-
-            
-            
-        })   
-        .catch((err) => {
-            console.log(err);    
-
-        })      ; 
-    }
-
-
-    useEffect (() => {
-
-        pendingorders();    
-
-
-    }, []); 
-
-    const changeStatus = async  (orderid , newstatus) => {
-
-
-        const responce = await axios.post('http://localhost:3062/foodapp/admin/updateorder' , {
-            id : orderid, 
-            status : newstatus 
-        }, 
+  const changeStatus = async (orderid, newstatus) => {
+    await axios
+      .post(
+        "http://localhost:3062/foodapp/admin/updateorder",
         {
-            headers : {
-                Authorization : `${localStorage.getItem('token')}`
-            }
-        })   
+          id: orderid,
+          status: newstatus,
+        },
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((responce) => {
+        console.log(responce.data);
+        alert("Status Changed Successfully");
+        pendingorders();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Status Not Changed");
+      });
+  };
 
-        .then((responce) => {
-            console.log(responce.data); 
-            alert('Status Changed Successfully');   
-            
-            pendingorders();     
-        })   
-        .catch((err) => {
-            console.log(err); 
-            alert('Status Not Changed');    
-        }) ;    
+  return (
+    <>
+      <div className="flex flex-col items-center min-h-screen bg-gray-50 py-10">
+        {/* Heading */}
+        <h1 className="text-3xl font-semibold text-gray-800 mb-6">
+          Admin Order Status Management
+        </h1>
 
+        {/* Orders List */}
+        <div className="w-full md:w-3/4 lg:w-1/2 bg-white shadow-md rounded-lg p-6">
+          {data.length > 0 ? (
+            data.map((userOrder, index) => (
+              <PendingOrderCard
+                key={index}
+                username={userOrder.username}
+                orders={userOrder.orders}
+                ChangeStatus={changeStatus}
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No pending orders found.</p>
+          )}
+        </div>
 
-    }
-
-    console.log(data);   
-
-
-    return (
-        <>
-
-
-          <h1>Admin Status Change</h1>
-
-          
-
-          {data.map(( userOrder , index  )=>( <PendingOrderCard key={index} username={userOrder.username} orders={userOrder.orders} ChangeStatus={changeStatus} />))}       
-
-
-         
-        </>
-      ); 
-
-
+        {/* Refresh Button */}
+        <div className="mt-8">
+          <button
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-500 transition-colors"
+            onClick={pendingorders}
+          >
+            Refresh Orders
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }

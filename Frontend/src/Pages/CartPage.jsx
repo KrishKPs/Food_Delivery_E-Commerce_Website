@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import {  useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 // Load Stripe with your publishable key
 const stripePromise = loadStripe("pk_test_51Q3A8907tIc5oTXBtgselQRXk67WbbjMMM77V9AdHDqGhuAN7UpEZin4JZoZDDINt24NszTzqhBDidfP3iTBcaIM00f74WmCTg");

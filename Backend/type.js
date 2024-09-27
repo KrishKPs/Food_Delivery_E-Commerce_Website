@@ -2,15 +2,15 @@ const zod = require('zod');
 
 const userSchema = zod.object({ 
 
-    username : zod.string().min(3).max(20),
+    username : zod.string().min(3),
     email : zod.string().email(),
     adress : zod.string() , 
-    password : zod.string().min(6).max(20)
+    password : zod.string().min(6)
 })
 
 const restaurantSchema = zod.object({
 
-    username : zod.string().min(3).max(20), 
+    username : zod.string().min(3), 
     image : zod.string().url(),        
     category : zod.string(), 
     adress : zod.string().min(3).max(100),  
@@ -20,7 +20,7 @@ const restaurantSchema = zod.object({
 
 const itemSchema = zod.object({
 
-    name : zod.string().min(3).max(20),
+    name : zod.string().min(3),
     price : zod.number().min(0),
     image : zod.string().url(),  
     description : zod.string().min(3).max(100)
@@ -28,9 +28,9 @@ const itemSchema = zod.object({
 
 const adminSchema = zod.object({ 
 
-    username : zod.string().min(3).max(20),
+    username : zod.string().min(3),
     email : zod.string().email(),
-    password : zod.string().min(6).max(20)
+    password : zod.string().min(6)
 })
 
 

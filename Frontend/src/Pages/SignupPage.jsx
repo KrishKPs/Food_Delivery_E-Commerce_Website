@@ -12,6 +12,7 @@ export function SignupPage () {
     const [user, setUser] = useState({ 
         username: "",
         email: "",
+        adress : "", 
         password: ""    
     });        
 
@@ -71,6 +72,17 @@ export function SignupPage () {
                         placeholder="m@example.com" 
                         className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900" 
                         onChange={(e)=> setUser({ ...user, email: e.target.value })} 
+                    />
+                </div>
+
+
+                <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Address </label>
+                    <Input
+                        type="text" 
+                        placeholder="Adress" 
+                        className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900" 
+                        onChange={(e)=> setUser({ ...user, adress: e.target.value })} 
                     />
                 </div>
 
