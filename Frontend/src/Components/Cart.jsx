@@ -28,11 +28,13 @@ export function CartCard({ data, removeitem }) {
           <button
             onClick={() => removeitem(data)}
             className="text-red-500 text-sm mt-2 underline hover:text-red-600"
-          >
-            Remove
+          > 
+            Remove 
           </button>
         </div>
       </div>
     );
   }
+
+  //hello
   
