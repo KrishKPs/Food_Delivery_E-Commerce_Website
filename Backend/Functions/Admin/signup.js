@@ -1,12 +1,12 @@
 const generateJWT = require("../../MiddleWare/generatejwt");
 const { admin } = require("../../db");
-const { userSchema } = require("../../type");
+const {  adminSchema } = require("../../type");
 
 
    async function AdminSignup (req,res) {
 
     const person = req.body;  
-    const safeperson = userSchema.safeParse(person);        
+    const safeperson = adminSchema.safeParse(person);        
 
     if(!safeperson.success) {
         return res.status(400).json({message : 'Invalid data'}); 

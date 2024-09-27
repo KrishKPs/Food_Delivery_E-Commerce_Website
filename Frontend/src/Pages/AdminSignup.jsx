@@ -28,8 +28,7 @@ export function AdminSignup () {
             console.log(responce.data)
             const data = responce.data; 
        
-                alert("Signup Success")
-                navigate('/dashboard')   
+                alert("Signup Success")  
                 localStorage.setItem('token', data.token)     
                 navigate('/pendingorders')       
         
