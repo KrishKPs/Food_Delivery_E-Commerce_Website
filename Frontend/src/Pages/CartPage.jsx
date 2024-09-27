@@ -28,7 +28,7 @@ export function CartPage() {
 
       try {
         const response = await axios.post(
-          "https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/payment",
+          "https://frontend-h6hh3834k-krish-patels-projects-3e6b9326.vercel.app/foodapp/payment",
           { amount: totalPrice * 100 },
           {
             headers: {
@@ -87,7 +87,7 @@ export function CartPage() {
         }));
 
         const response = await axios.post(
-          `https://backend-8ew7thslt-krish-patels-projects-3e6b9326.vercel.app/foodapp/order/restaurant/${restroid.id}`,
+          `https://frontend-h6hh3834k-krish-patels-projects-3e6b9326.vercel.app/foodapp/order/restaurant/${restroid.id}`,
           {
             restaurant: restroid.name,
             order: sendorder,
