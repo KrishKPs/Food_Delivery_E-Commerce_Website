@@ -30,27 +30,23 @@ export function DashBoard () {
 
 
 
-     return (
-
-
+    return (
         <>
-        
+            {/* Navbar */}
+            <Navbar setsearch={setSearch} handlesearch={handlesearch}/> 
 
-            <Navbar  setsearch={setSearch} handlesearch={handlesearch}/> 
-
-
-<div className="grid grid-cols-4">
-    
-{restro.map( (restro , index) => (<RestroCard key={index} data={restro} />))}  
-
-</div>
-           
-         
-
-
-    
-        
-        
+            {/* Restro Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 py-8">
+                {restro.length > 0 ? (
+                    restro.map((restro, index) => (
+                        <RestroCard key={index} data={restro} />
+                    ))
+                ) : (
+                    <div className="col-span-full text-center text-gray-500 text-lg">
+                        No restaurants found.
+                    </div>
+                )}
+            </div>
         </>
-     );
+    );
 }
