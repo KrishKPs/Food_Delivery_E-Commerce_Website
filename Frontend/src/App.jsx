@@ -12,7 +12,7 @@ import { RestroLogin } from './Pages/RestoLogin'
 import { AddMenu } from './Pages/AddMenu'
 import { AdminSignup } from './Pages/AdminSignup'
 import { AdminLogin } from './Pages/AdminLogin'
-import { AdminStatusChange } from './Pages/AdminStatusChange'
+// import { AdminStatusChange } from './Pages/AdminStatusChange'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import {  OrderHistroy } from './Pages/OrderHistory'
