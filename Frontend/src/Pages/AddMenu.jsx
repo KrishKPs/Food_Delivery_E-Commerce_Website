@@ -17,7 +17,7 @@ export function AddMenu() {
 
     console.log(data);   
 
-      const responce = await axios.post('http://localhost:3062/foodapp/addmenu', data, 
+      const responce = await axios.post('https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/addmenu', data, 
       {
         headers : {
           Authorization : `${localStorage.getItem('token')}`

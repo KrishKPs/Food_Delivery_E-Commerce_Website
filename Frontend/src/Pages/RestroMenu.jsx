@@ -20,7 +20,7 @@ export function RestroMenu() {
 
   const menuitems = async () => {
     const response = await axios.get(
-      `http://localhost:3062/foodapp/menu/restaurant/${restaurant.id}`,
+      `https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/menu/restaurant/${restaurant.id}`,
       {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,

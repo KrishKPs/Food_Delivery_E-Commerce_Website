@@ -12,7 +12,7 @@ export function DashBoard () {
 
     const handlesearch = async  () => {
 
-        await   axios.post('http://localhost:3062/foodapp/restaurantcity' , {city : search}, {
+        await   axios.post('https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/restaurantcity' , {city : search}, {
          headers : {
            Authorization : `${localStorage.getItem('token')}` 
          }

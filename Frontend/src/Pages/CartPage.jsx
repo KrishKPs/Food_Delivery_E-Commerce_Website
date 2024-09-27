@@ -28,7 +28,7 @@ export function CartPage() {
 
       try {
         const response = await axios.post(
-          "http://localhost:3062/foodapp/payment",
+          "https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/payment",
           { amount: totalPrice * 100 },
           {
             headers: {
@@ -87,7 +87,7 @@ export function CartPage() {
         }));
 
         const response = await axios.post(
-          `http://localhost:3062/foodapp/order/restaurant/${restroid.id}`,
+          `https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/order/restaurant/${restroid.id}`,
           {
             restaurant: restroid.name,
             order: sendorder,

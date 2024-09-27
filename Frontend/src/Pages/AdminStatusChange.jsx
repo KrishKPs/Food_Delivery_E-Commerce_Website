@@ -7,7 +7,7 @@ export function AdminStatusChange() {
 
   const pendingorders = async () => {
     await axios
-      .get("http://localhost:3062/foodapp/admin/pendingorders", {
+      .get("https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/admin/pendingorders", {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -28,7 +28,7 @@ export function AdminStatusChange() {
   const changeStatus = async (orderid, newstatus) => {
     await axios
       .post(
-        "http://localhost:3062/foodapp/admin/updateorder",
+        "https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/admin/updateorder",
         {
           id: orderid,
           status: newstatus,

@@ -21,7 +21,7 @@ export function AdminSignup () {
 
 
 
-        const responce = await axios.post('http://localhost:3062/foodapp/admin/signup', user)
+        const responce = await axios.post('https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/admin/signup', user)
 
         .then((responce) => {
 
