@@ -9,7 +9,7 @@ const {  adminSchema } = require("../../type");
     const safeperson = adminSchema.safeParse(person);        
 
     if(!safeperson.success) {
-        return res.status(400).json({message : 'Invalid data'}); 
+        return res.status(400).json({message : 'Invalid data check'}); 
     } 
 
     await admin.create({
