@@ -23,7 +23,7 @@ async function payment(req, res) {
     } catch (error) {
         console.error("Payment Error:", error);
         // If there is an error, respond with a 500 status and error message
-        res.status(500).json({ error: 'Payment processing failed. Please try again.' });
+        res.status(500).json({ error: 'Payment processing failed. Please try again.' , error });
     }
 }
 

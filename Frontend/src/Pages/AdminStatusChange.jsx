@@ -31,7 +31,7 @@ export function AdminStatusChange() {
   const changeStatus = async (orderid, newstatus) => {
     await axios
       .post(
-        "https://backend-a07sy6pd1-krish-patels-projects-3e6b9326.vercel.app/foodapp/admin/updateorder",
+        "https://backend-l7u8fzvxj-krish-patels-projects-3e6b9326.vercel.app/foodapp/admin/updateorder",
         {
           id: orderid,
           status: newstatus,
