@@ -7,10 +7,11 @@
       }
     ],
     "routes": [
-      {
-        "src": "/foodapp/(.*)",
-        "dest": "index.js" 
-      }
+        {
+            "src": "/(.*)",
+            "dest": "index.js"
+          }
+          
     ]
   }
   
