@@ -7,15 +7,10 @@ const PORT = process.env.PORT || 3000;
 const mainRouter = require('./Routes/index');   
 const db = require('./db');  
 
-const corsOptions = {
-    origin: 'https://frontend-swart-tau-69.vercel.app/', // Your Vercel frontend URL
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  };
 
 app.use(express.json());   
-app.use(cors(corsOptions)); 
+app.use(cors()); 
+
 
 app.use('/foodapp' , mainRouter)
 app.get ('/' , function (req,res) {
