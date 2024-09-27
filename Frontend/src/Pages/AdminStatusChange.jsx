@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PendingOrderCard } from "../Components/PendingOrderCard"; // Assuming this component is already styled
+import { OrderAdminCard } from "../Components/PendingOrderCard";
+
+
 
 export function AdminStatusChange() {
   const [data, setdata] = useState([]);
@@ -62,7 +64,7 @@ export function AdminStatusChange() {
         <div className="w-full md:w-3/4 lg:w-1/2 bg-white shadow-md rounded-lg p-6">
           {data.length > 0 ? (
             data.map((userOrder, index) => (
-              <PendingOrderCard
+              <OrderAdminCard
                 key={index}
                 username={userOrder.username}
                 orders={userOrder.orders}
@@ -83,6 +85,8 @@ export function AdminStatusChange() {
             Refresh Orders
           </button>
         </div>
+
+    
       </div>
     </>
   );

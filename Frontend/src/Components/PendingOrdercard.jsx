@@ -1,4 +1,4 @@
-export function PendingOrderCard({ username, orders, ChangeStatus }) {
+export function OrderAdminCard({ username, orders, ChangeStatus }) {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-6 w-full">
       {/* Username */}

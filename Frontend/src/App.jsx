@@ -16,6 +16,7 @@ import { AdminStatusChange } from './Pages/AdminStatusChange'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import {  OrderHistroy } from './Pages/OrderHistory'
+import { PendingOrderCard } from './Components/PendingOrderCard'
 const stripePromise = loadStripe("pk_test_51Q3A8907tIc5oTXBtgselQRXk67WbbjMMM77V9AdHDqGhuAN7UpEZin4JZoZDDINt24NszTzqhBDidfP3iTBcaIM00f74WmCTg");
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
 
            <Route path='orders' element={<OrderHistroy/>} />  
 
+
+      
             
   
            
