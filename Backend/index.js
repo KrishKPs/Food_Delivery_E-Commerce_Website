@@ -7,14 +7,15 @@ const PORT = process.env.PORT || 3000;
 const mainRouter = require('./Routes/index');   
 const db = require('./db');  
 
-// const corsOptions = {
-//     origin: 'https://frontend-fprdpksck-krish-patels-projects-3e6b9326.vercel.app/', // Replace with your frontend URL
-//     optionsSuccessStatus: 200
-// };
+const corsOptions = {
+    origin: 'https://frontend-swart-tau-69.vercel.app/', // Your Vercel frontend URL
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  };
 
 app.use(express.json());   
-// app.use(cors());  
-app.use(cors()); 
+app.use(cors(corsOptions)); 
 
 app.use('/foodapp' , mainRouter)
 app.get ('/' , function (req,res) {
