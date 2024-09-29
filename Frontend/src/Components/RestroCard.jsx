@@ -7,7 +7,7 @@ export function RestroCard({ data }) {
   return (
     <div
       onClick={() => navigate(`${url}`)}
-      className="ml-1 mt-5  flex flex-col h-auto w-full  rounded-lg p-4 bg-white shadow-md hover:shadow-xl hover:rounded-xl transition-all duration-300 ease-in-out cursor-pointer"
+      className=" mt-5  flex flex-col h-auto w-full  rounded-lg p-4 bg-white shadow-md hover:shadow-xl hover:rounded-xl transition-all duration-300 ease-in-out cursor-pointer"
     >
       <img
         src={data.image}  
