@@ -7,7 +7,7 @@ export function OrderHistroy() {
 
   const getOrders = async () => {
     const responce = await axios
-      .get("https://backend-l7u8fzvxj-krish-patels-projects-3e6b9326.vercel.app/foodapp/history", {
+      .get("https://backend-d2jsihff7-krish-patels-projects-3e6b9326.vercel.app/foodapp/history", {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
