@@ -1,115 +1,124 @@
+import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
-import { FaSearch, FaBars } from "react-icons/fa";
-import { FiSettings, FiCreditCard, FiShoppingCart, FiLogOut } from "react-icons/fi";
 import { useState } from "react";
+import { FiSettings, FiCreditCard, FiShoppingCart, FiLogOut } from "react-icons/fi";
 
 export function Navbar({ handlesearch, setsearch }) {
-  const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+    const handleLogout = () => {
+        localStorage.removeItem("token"); 
+        navigate("/login"); 
+    };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+    };
 
-  return (
-    <>
-      <div className="flex justify-between items-center h-16 w-full border-b-2 border-gray-200 px-4 bg-gradient-to-r from-white to-gray-100 shadow-lg transition-all duration-300 ease-in-out">
-        {/* Logo */}
-        <h1 className="text-3xl font-extrabold text-blue-600 animate-pulse sm:text-2xl">Zomato</h1>
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
-        {/* Hamburger Menu for mobile */}
-        <div className="sm:hidden">
-          <FaBars onClick={toggleMenu} className="text-2xl text-gray-600 cursor-pointer" />
-        </div>
+    return (
+        <div className="flex justify-between h-20 w-full items-center bg-gradient-to-r from-red-500 to-orange-400 shadow-lg px-4 sm:px-8 relative">
+            {/* Brand logo */}
+            <h1
+                className="text-4xl text-white font-bold tracking-widest cursor-pointer transition-transform transform hover:scale-105"
+                onClick={() => navigate("/")}
+            >
+                Zomato
+            </h1>
 
-        {/* Search Bar */}
-        <div className="relative flex items-center w-full sm:w-auto mt-2 sm:mt-0 hidden sm:flex">
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={(e) => setsearch(e.target.value)}
-            className="border-2 border-gray-300 rounded-full p-2 pl-10 w-full sm:w-80 focus:outline-none focus:border-blue-500 transition-all"
-          />
-          <FaSearch onClick={handlesearch} className="absolute left-3 text-gray-500 text-xl cursor-pointer hover:text-blue-600 transition-all" />
-        </div>
+            {/* Search bar */}
+            <div className="relative hidden md:block">
+                <input
+                    className="w-96 h-12 px-5 rounded-full bg-white border-0 shadow-md focus:ring-2 focus:ring-orange-400 text-gray-800 placeholder-gray-500 outline-none transition-transform transform hover:scale-105"
+                    type="text"
+                    placeholder="Search for restaurants by locations..."
+                    onChange={(e) => setsearch(e.target.value)}
+                />
+                <FaSearch 
+                    className="absolute top-4 right-5 text-gray-500 cursor-pointer transition-transform transform hover:scale-110"
+                    onClick={handlesearch} 
+                />
+            </div>
 
-        {/* Navigation Buttons */}
-        <div className="hidden sm:flex space-x-4 items-center mt-2 sm:mt-0">
-          <button onClick={() => navigate("/signup")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Sign Up
-          </button>
-          <button onClick={() => navigate("/login")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Login
-          </button>
-          <button onClick={() => navigate("/dashboard")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Dashboard
-          </button>
-  
-          {/* User Image with Dropdown */}
-          <div className="relative">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMx1itTXTXLB8p4ALTTL8mUPa9TFN_m9h5VQ&usqp=CAU"
-              alt="User Profile"
-              className="w-10 h-10 rounded-full cursor-pointer border-2 border-blue-500 hover:shadow-lg transition-all"
-              onClick={toggleDropdown}
-            />
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-2">
-                <button onClick={() => navigate("/settings")} className="flex items-center px-4 py-2 hover:bg-gray-100 w-full">
-                  <FiSettings className="mr-2" /> Settings
-                </button>
-                <button onClick={() => navigate("/orders")} className="flex items-center px-4 py-2 hover:bg-gray-100 w-full">
-                  <FiShoppingCart className="mr-2" /> Orders
-                </button>
-                <button onClick={() => navigate("/payments")} className="flex items-center px-4 py-2 hover:bg-gray-100 w-full">
-                  <FiCreditCard className="mr-2" /> Payments
+            {/* Hamburger Icon for Mobile */}
+            <div className="md:hidden">
+                <FaBars 
+                    className="text-3xl text-white cursor-pointer" 
+                    onClick={toggleMobileMenu} 
+                />
+            </div>
+
+            {/* Action buttons and dropdown */}
+            <div className={`flex items-center space-x-8 ${isMobileMenuOpen ? 'absolute bg-gradient-to-r from-red-500 to-orange-400 w-full top-20 left-0 flex-col p-4 rounded-lg md:hidden' : 'hidden md:flex'}`}>
+                <button
+                    onClick={() => navigate("/signup")}
+                    className="px-6 py-2 rounded-full bg-white text-orange-600 font-semibold shadow-lg hover:bg-orange-600 hover:text-white transition duration-300 transform hover:scale-105"
+                >
+                    Sign Up
                 </button>
                 <button
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    navigate("/login");
-                  }}
-                  className="flex items-center px-4 py-2 hover:bg-gray-100 w-full"
+                    onClick={() => navigate("/login")}
+                    className="px-6 py-2 rounded-full bg-white text-orange-600 font-semibold shadow-lg hover:bg-orange-600 hover:text-white transition duration-300 transform hover:scale-105"
                 >
-                  <FiLogOut className="mr-2" /> Log Out
+                    Login
                 </button>
-              </div>
+
+                {/* User profile icon */}
+                <div className="relative">
+                    <FaUserCircle
+                        className="text-4xl text-white cursor-pointer transition-transform transform hover:scale-110"
+                        onClick={toggleDropdown}
+                    />
+                    {/* Dropdown menu */}
+                    {showDropdown && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-10">
+                            <button
+                                onClick={() => navigate("/settings")}
+                                className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 flex items-center"
+                            >
+                                <FiSettings className="mr-2" /> Settings
+                            </button>
+                            <button
+                                onClick={() => navigate("/orders")}
+                                className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 flex items-center"
+                            >
+                                <FiShoppingCart className="mr-2" /> Orders
+                            </button>
+                            <button
+                                onClick={() => navigate("/payments")}
+                                className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 flex items-center"
+                            >
+                                <FiCreditCard className="mr-2" /> Payments
+                            </button>
+                            <button
+                                onClick={handleLogout}
+                                className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors duration-200 flex items-center"
+                            >
+                                <FiLogOut className="mr-2" /> Log Out
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Close Mobile Menu Icon */}
+            {isMobileMenuOpen && (
+                <div className="absolute top-20 left-0 w-full bg-gradient-to-r from-red-500 to-orange-400 rounded-lg p-4">
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-white font-semibold text-lg">Menu</h2>
+                        <FaTimes className="text-2xl text-white cursor-pointer" onClick={toggleMobileMenu} />
+                    </div>
+                    <button onClick={() => navigate("/signup")} className="block text-white text-left px-4 py-2">Sign Up</button>
+                    <button onClick={() => navigate("/login")} className="block text-white text-left px-4 py-2">Login</button>
+                    <button onClick={() => navigate("/orders")} className="block text-white text-left px-4 py-2">Orders</button>
+                    <button onClick={handleLogout} className="block text-white text-left px-4 py-2">Logout</button>
+                </div>
             )}
-          </div>
         </div>
-      </div>
-
-      {/* Mobile Search and Navigation Menu */}
-      {menuOpen && (
-        <div className="sm:hidden flex flex-col space-y-4 mt-4 px-4">
-          {/* Search Bar for Mobile */}
-          <div className="relative flex items-center w-full">
-            <input
-              type="text"
-              placeholder="Search"
-              onChange={(e) => setsearch(e.target.value)}
-              className="border-2 border-gray-300 rounded-full p-2 pl-10 w-full focus:outline-none focus:border-blue-500 transition-all"
-            />
-            <FaSearch onClick={handlesearch} className="absolute left-3 text-gray-500 text-xl cursor-pointer hover:text-blue-600 transition-all" />
-          </div>
-
-          {/* Mobile Navigation Buttons */}
-          <button onClick={() => navigate("/signup")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Sign Up
-          </button>
-          <button onClick={() => navigate("/login")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Login
-          </button>
-          <button onClick={() => navigate("/dashboard")} className="text-gray-600 hover:text-blue-600 transition-all sm:text-sm">
-            Dashboard
-          </button>
-        </div>
-      )}
-    </>
-  );
+    );
 }
