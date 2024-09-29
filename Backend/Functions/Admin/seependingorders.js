@@ -1,8 +1,14 @@
-const { userorder } = require("../../db");
+const { userorder, admin } = require("../../db");
 
 async function allhistroy (req,res) {  
 
     const user = req.username; 
+
+    const Exists = await admin.findOne ({ username : user});     
+
+    if(!Exists) {
+        return res.status(400).json({message : 'Admin not found'});  
+    }
 
 
 

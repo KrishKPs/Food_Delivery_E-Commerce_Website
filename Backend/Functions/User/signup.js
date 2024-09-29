@@ -12,6 +12,11 @@ async function signup (req,res) {
         return res.status(400).json({message : 'Invalid data'}); 
     } 
 
+    const Exists = await user.findOne ({ username : person.username});   
+    if(Exists) {
+        return res.status(400).json({message : 'Username Already Exits'}) 
+    }
+
     const hashed = await bcrypt.hash(person.password, 10);   
 
 

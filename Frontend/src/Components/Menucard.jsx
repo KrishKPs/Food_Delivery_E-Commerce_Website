@@ -1,7 +1,11 @@
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
+import { useCart } from "./AddtoCard";
 
 export function MenuCard({ data, addtocart, removefromcart, setshow }) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
+    const { cart } = useCart();
+
 
     const cartItem = cart.find((item) => item._id === data._id);
 
@@ -30,7 +34,7 @@ export function MenuCard({ data, addtocart, removefromcart, setshow }) {
                     <p className="text-lg font-bold text-gray-800">${data.price}</p>
 
                     {/* Quantity and Remove Button */}
-                    {cartItem && cartItem.quantity > 0 ? (
+                    {cartItem  ? (
                         <div className="flex items-center space-x-2">
                             <button
                                 onClick={() => removefromcart(data)}
@@ -38,7 +42,7 @@ export function MenuCard({ data, addtocart, removefromcart, setshow }) {
                             >
                                 <IoRemoveCircleOutline className="text-xl" />
                             </button>
-                            <p className="text-lg">{cartItem.quantity}</p>
+                            <p className="text-lg">{cartItem.quantity }</p>
                             <button
                                 onClick={() => {
                                     addtocart(data);
